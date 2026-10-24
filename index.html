@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mohamed Elaazzaoui – Full-Stack, Data &amp; IA</title>
+<meta name="description" content="Mohamed Elaazzaoui, développeur full-stack et data à Casablanca : applications web, pipelines Big Data, MLOps et IA générative. Disponible pour un PFE en février 2027.">
+<meta name="author" content="Mohamed Elaazzaoui">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mohamed Elaazzaoui – Full-Stack, Data & IA">
+<meta property="og:description" content="Applications web, pipelines de données et IA, du prototype à la production. Disponible pour un PFE en février 2027.">
+<meta property="og:image" content="/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23cfa355' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mohamed Elaazzaoui",
+  "jobTitle": "Développeur Full-Stack, Data & IA",
+  "email": "mailto:elaazzaoui.mohamed@outlook.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Casablanca", "addressCountry": "MA" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Faculté des Sciences Ben M'Sik, Université Hassan II de Casablanca" },
+  "knowsAbout": ["Spring Boot", "Laravel", "React", "Apache Spark", "Apache Kafka", "Airflow", "dbt", "MLflow", "RAG", "Docker", "Kubernetes", "Azure"],
+  "knowsLanguage": ["fr", "en", "ar"],
+  "sameAs": ["https://www.linkedin.com/in/elaazzaoui-mohamed-50196332b", "https://github.com/elaazzaouimohamed"]
+}
+</script>
+<style>
+/* Light stone stage for the hero and odd sections, black rounded "plates" for the others, gold as the only accent. */
+:root{
+  --stone:#e4e4df;
+  --black:#000000;
+  --ink:#0b0b0b;
+  --white:#ffffff;
+  --gold:#cfa355;
+  --dim-w:rgba(255,255,255,.62);
+  --faint-w:rgba(255,255,255,.3);
+  --line-w:rgba(255,255,255,.18);
+  --dim-k:rgba(0,0,0,.6);
+  --line-k:rgba(0,0,0,.18);
+  --font:"Jost", "Futura", "Century Gothic", system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--stone);-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{background:var(--stone);color:var(--ink);font-family:var(--font);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.locked{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+::selection{background:var(--gold);color:var(--black)}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(clamp(20px,5vw,64px), env(safe-area-inset-left,0px));padding-right:max(clamp(20px,5vw,64px), env(safe-area-inset-right,0px))}
+.label{font-size:.82rem;letter-spacing:.55em;text-transform:uppercase;font-weight:300}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- custom cursor (fine pointers only) ---------- */
+.cursor,.cursor-dot{position:fixed;top:0;left:0;pointer-events:none;z-index:200;border-radius:50%;mix-blend-mode:difference;display:none}
+.cursor{width:38px;height:38px;margin:-19px 0 0 -19px;border:1px solid #fff;transition:width .3s,height .3s,margin .3s,background .3s}
+.cursor-dot{width:6px;height:6px;margin:-3px 0 0 -3px;background:#fff}
+.cursor.hover{width:76px;height:76px;margin:-38px 0 0 -38px;background:#fff}
+@media (pointer:fine){ .has-cursor .cursor,.has-cursor .cursor-dot{display:block} .has-cursor,.has-cursor a,.has-cursor button{cursor:none} .has-cursor input,.has-cursor textarea{cursor:text} }
+
+/* ---------- loader ---------- */
+#loader{position:fixed;inset:0;z-index:100;background:var(--black);color:var(--white);display:grid;place-items:center;transition:transform 1s cubic-bezier(.77,0,.18,1)}
+#loader.done{transform:translateY(-100%)}
+#loader .box{width:min(300px,70vw);text-align:center}
+#loader .pct{font-size:1.5rem;letter-spacing:.12em;font-weight:300;margin-bottom:22px;font-variant-numeric:tabular-nums}
+#loader .bar{height:3px;background:#2a2a2a;border-radius:3px;overflow:hidden}
+#loader .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .2s linear}
+
+/* ---------- fixed controls ---------- */
+.ctrl{position:fixed;top:max(22px, calc(env(safe-area-inset-top,0px) + 12px));z-index:60;border-radius:50%;background:var(--black);border:1px solid rgba(255,255,255,.22);cursor:pointer;display:grid;place-items:center;transition:background .3s,color .3s}
+#menuBtn{right:max(22px, calc(env(safe-area-inset-right,0px) + 12px));width:68px;height:68px}
+#langBtn{right:calc(max(22px, calc(env(safe-area-inset-right,0px) + 12px)) + 80px);top:calc(max(22px, calc(env(safe-area-inset-top,0px) + 12px)) + 10px);width:48px;height:48px;color:var(--white);font-size:.78rem;letter-spacing:.15em}
+#langBtn:hover{background:var(--gold);color:var(--black)}
+#menuBtn span{position:absolute;width:30px;height:2px;background:var(--white);transition:transform .45s cubic-bezier(.77,0,.18,1)}
+#menuBtn span:nth-child(1){transform:translateY(-4px)}
+#menuBtn span:nth-child(2){transform:translateY(4px)}
+body.menu-open #menuBtn{background:var(--gold)}
+body.menu-open #menuBtn span{background:var(--black)}
+body.menu-open #menuBtn span:nth-child(1){transform:rotate(45deg)}
+body.menu-open #menuBtn span:nth-child(2){transform:rotate(-45deg)}
+#menu{position:fixed;inset:0;z-index:55;background:var(--black);color:var(--white);clip-path:circle(0% at calc(100% - 56px) 56px);transition:clip-path .9s cubic-bezier(.77,0,.18,1);display:flex;flex-direction:column;justify-content:center;visibility:hidden}
+body.menu-open #menu{clip-path:circle(150% at calc(100% - 56px) 56px);visibility:visible}
+#menu nav{display:flex;flex-direction:column;gap:6px}
+#menu nav a{font-size:clamp(2.2rem,7vw,5rem);text-transform:uppercase;font-weight:200;line-height:1.1;display:flex;align-items:baseline;gap:22px;transition:color .3s,padding-left .4s}
+#menu nav a small{font-size:.9rem;color:var(--faint-w);letter-spacing:.1em}
+#menu nav a:hover{color:var(--gold);padding-left:14px}
+#menu .menu-foot{display:flex;flex-wrap:wrap;gap:12px 36px;margin-top:48px;color:var(--dim-w);letter-spacing:.12em;font-size:.9rem}
+#menu .menu-foot a:hover{color:var(--gold)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:120px;overflow:hidden}
+#scene{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero .wrap{position:relative;z-index:1;width:100%}
+.hero .label{margin-bottom:clamp(16px,3vw,28px)}
+.name{font-weight:400;text-transform:uppercase;font-size:clamp(2.1rem,12.4vw,11.5rem);line-height:.92;letter-spacing:-.01em}
+.name .ln{display:block;overflow:hidden;padding-bottom:.04em}
+.name .ln > span{display:inline-block}
+.hero-rule{height:1px;background:var(--ink);margin-top:clamp(18px,3vw,34px);transform-origin:left}
+.tagline{text-transform:uppercase;font-size:clamp(1rem,2.2vw,1.55rem);letter-spacing:.03em;line-height:1.65;text-align:right;max-width:880px;margin:clamp(22px,4vw,44px) 0 0 auto;font-weight:300}
+.tagline b{font-weight:400;color:var(--gold)}
+.hero-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:28px 34px}
+.status{display:inline-flex;align-items:center;gap:12px;font-size:.9rem;letter-spacing:.14em;text-transform:uppercase}
+.status i{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(207,163,85,.7);animation:ping 2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 10px rgba(207,163,85,0)}100%{box-shadow:0 0 0 0 rgba(207,163,85,0)}}
+.scroll-cue{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+.scroll-cue i{display:block;width:1px;height:42px;background:var(--ink);transform-origin:top;animation:cue 2s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- marquee ---------- */
+.marquee{background:var(--black);color:var(--white);overflow:hidden;padding-block:26px;white-space:nowrap}
+.marquee .track{display:inline-flex;animation:slide 38s linear infinite}
+.marquee span{font-size:clamp(1.4rem,3.4vw,2.6rem);text-transform:uppercase;font-weight:200;letter-spacing:.04em;padding:0 .9em;display:inline-flex;align-items:center;gap:1.8em}
+.marquee span::after{content:"";width:.32em;height:.32em;border-radius:50%;background:var(--gold);display:inline-block}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ---------- plates ---------- */
+.plate{position:relative;padding-block:clamp(90px,12vw,160px)}
+.plate.dark{background:var(--black);color:var(--white);border-radius:0 0 clamp(28px,4vw,56px) clamp(28px,4vw,56px);z-index:2}
+.plate.light{background:var(--stone);color:var(--ink)}
+.plate.dark + .plate.light{margin-top:calc(clamp(28px,4vw,56px) * -1);padding-top:calc(clamp(90px,12vw,160px) + clamp(28px,4vw,56px))}
+.plate.light + .plate.dark{border-radius:clamp(28px,4vw,56px)}
+.kicker{display:block;text-align:center;margin-bottom:clamp(60px,8vw,110px)}
+.sec-head{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:24px 48px;margin-bottom:clamp(50px,7vw,90px)}
+.sec-head .label{color:var(--gold);padding-top:.7em}
+.big{text-transform:uppercase;font-weight:300;font-size:clamp(1.5rem,3.6vw,3rem);line-height:1.3;letter-spacing:.01em;text-wrap:balance}
+.big em{font-style:normal;color:var(--gold)}
+.big .w{display:inline-block;overflow:hidden;vertical-align:top}
+.big .w > span{display:inline-block}
+
+/* services */
+.services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(60px,7vw,100px) clamp(40px,6vw,90px)}
+.svc{border-top:1px solid var(--line-w);padding-top:36px;min-width:0}
+.svc h3{font-weight:300;font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.15;margin-bottom:18px}
+.svc p{color:var(--dim-w);letter-spacing:.08em;font-size:1.02rem;margin-bottom:26px;max-width:52ch}
+.svc ol{list-style:none}
+.svc li{display:flex;gap:26px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line-w);font-size:1.2rem;font-weight:300;transition:padding-left .4s,color .3s}
+.svc li small{font-size:.95rem;color:var(--faint-w);font-variant-numeric:tabular-nums;min-width:22px}
+.svc li:hover{padding-left:10px;color:var(--gold)}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr) minmax(0,1fr);gap:clamp(30px,5vw,70px);align-items:start}
+.portrait{position:relative;aspect-ratio:4/5;max-width:100%;border-radius:28px;overflow:hidden;background:var(--black)}
+.portrait img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:filter .6s,transform .8s}
+.portrait:hover img{filter:none;transform:scale(1.03)}
+.portrait .mono{position:absolute;inset:0;display:none;place-items:center;color:var(--gold);font-size:clamp(3rem,7vw,5rem);font-weight:200;letter-spacing:.06em}
+.portrait .mono::before{content:"";position:absolute;width:62%;aspect-ratio:1;border:1px solid var(--gold);border-radius:50%}
+.portrait.empty .mono{display:grid}
+.about p{font-size:1.08rem;letter-spacing:.05em;color:var(--dim-k);margin-bottom:18px;max-width:58ch}
+.about p strong{font-weight:400;color:var(--ink)}
+.facts{list-style:none;border-top:1px solid var(--line-k)}
+.facts li{display:grid;grid-template-columns:minmax(0,110px) minmax(0,1fr);gap:14px;padding:16px 0;border-bottom:1px solid var(--line-k)}
+.facts li > span:first-child{font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim-k);padding-top:.25em}
+.facts li > span:last-child{font-size:1.02rem;font-weight:400}
+.cv-btn{display:inline-flex;align-items:center;gap:18px;margin-top:26px;padding:18px 30px;border-radius:999px;background:var(--black);color:var(--white);letter-spacing:.2em;text-transform:uppercase;font-size:.85rem;transition:background .3s,color .3s}
+.cv-btn:hover{background:var(--gold);color:var(--black)}
+
+/* works */
+.works{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(22px,3vw,34px)}
+.work{position:relative;border:1px solid var(--line-w);border-radius:28px;padding:clamp(26px,3vw,40px);display:flex;flex-direction:column;overflow:hidden;transition:border-color .4s,transform .5s cubic-bezier(.2,.8,.2,1);min-width:0}
+.work::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--x,50%) var(--y,0%),rgba(207,163,85,.16),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none}
+.work:hover{border-color:var(--gold);transform:translateY(-6px)}
+.work:hover::before{opacity:1}
+.shot{margin:calc(clamp(26px,3vw,40px) * -1) calc(clamp(26px,3vw,40px) * -1) 28px;aspect-ratio:16/9;max-width:none;overflow:hidden;border-bottom:1px solid var(--line-w)}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .8s}
+.work:hover .shot img{transform:scale(1.04)}
+.work .top{display:flex;justify-content:space-between;align-items:center;padding-bottom:40px}
+.work .idx{font-size:.9rem;color:var(--faint-w);letter-spacing:.2em;font-variant-numeric:tabular-nums}
+.work .cat{font-size:.72rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold)}
+.work h3{font-weight:300;font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.12;margin-bottom:16px}
+.work p{color:var(--dim-w);letter-spacing:.05em;font-size:.98rem;margin-bottom:22px;max-width:50ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px;margin-top:auto}
+.tags span{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;padding:7px 12px;border:1px solid var(--line-w);border-radius:999px;color:var(--dim-w)}
+.work .go{display:inline-flex;align-items:center;gap:12px;letter-spacing:.25em;text-transform:uppercase;font-size:.78rem;align-self:flex-start;border-bottom:1px solid var(--faint-w);padding-bottom:4px;transition:color .3s,border-color .3s}
+.work .go:hover{color:var(--gold);border-color:var(--gold)}
+.works-more{margin-top:42px;color:var(--dim-w);letter-spacing:.08em;max-width:70ch}
+
+/* experience */
+.rows{border-top:1px solid var(--ink)}
+.erow{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr) minmax(0,260px);gap:20px 40px;padding:34px 0;border-bottom:1px solid var(--line-k);transition:padding-left .4s}
+.erow:hover{padding-left:12px}
+.erow .when{font-size:.9rem;letter-spacing:.2em;color:var(--dim-k);font-variant-numeric:tabular-nums;padding-top:.5em}
+.erow h3{font-weight:400;font-size:clamp(1.3rem,2.2vw,1.75rem);line-height:1.25;margin-bottom:8px}
+.erow ul{list-style:none;display:grid;gap:6px}
+.erow li{color:var(--dim-k);letter-spacing:.04em;padding-left:22px;position:relative;max-width:62ch}
+.erow li::before{content:"";position:absolute;left:0;top:.8em;width:10px;height:1px;background:var(--gold)}
+.erow .org{font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;text-align:right;padding-top:.6em}
+
+/* skills */
+.stack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(30px,4vw,60px)}
+.stack div{border-top:1px solid var(--line-w);padding:24px 0 34px;min-width:0}
+.stack h4{font-size:.75rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);font-weight:400;margin-bottom:12px}
+.stack p{font-size:1.1rem;letter-spacing:.04em;line-height:1.8;color:var(--white)}
+
+/* contact */
+.contact{background:var(--black);color:var(--white);padding-block:clamp(110px,14vw,190px) 40px;border-radius:clamp(28px,4vw,56px) clamp(28px,4vw,56px) 0 0;margin-top:clamp(28px,4vw,56px)}
+.contact > .wrap > .label{color:var(--gold);display:block;margin-bottom:28px}
+.cta{font-size:clamp(3rem,11vw,10rem);text-transform:uppercase;font-weight:300;line-height:.95;letter-spacing:-.01em}
+.cta span{display:block}
+.cta span:last-child{color:var(--gold)}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(40px,6vw,90px);margin-top:clamp(50px,7vw,90px);align-items:start}
+.mail-row{display:flex;flex-wrap:wrap;align-items:center;gap:18px 24px}
+.mail{font-size:clamp(1.1rem,2.4vw,1.8rem);font-weight:300;border-bottom:1px solid var(--faint-w);padding-bottom:6px;word-break:break-all;transition:color .3s,border-color .3s}
+.mail:hover{color:var(--gold);border-color:var(--gold)}
+.pill{display:inline-block;background:transparent;border:1px solid var(--faint-w);border-radius:999px;padding:12px 22px;letter-spacing:.25em;text-transform:uppercase;font-size:.75rem;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.pill:hover{background:var(--gold);border-color:var(--gold);color:var(--black)}
+.socials{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:44px;border-top:1px solid var(--line-w)}
+.socials > *{padding:20px 16px 20px 0;border-bottom:1px solid var(--line-w);display:grid;gap:4px;min-width:0}
+.socials small{font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--faint-w)}
+.socials strong{font-weight:300;font-size:1.02rem;letter-spacing:.05em;overflow-wrap:anywhere}
+.socials a:hover strong{color:var(--gold)}
+.form{display:grid;gap:26px}
+.field{display:grid;gap:8px}
+.field label{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--faint-w)}
+.field input,.field textarea{background:transparent;border:0;border-bottom:1px solid var(--line-w);padding:10px 0;font-size:1.15rem;font-weight:300;letter-spacing:.03em;resize:vertical;transition:border-color .3s;border-radius:0}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+.field textarea{min-height:120px}
+.form-foot{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.send{background:var(--gold);color:var(--black);border:0;border-radius:999px;padding:18px 34px;letter-spacing:.25em;text-transform:uppercase;font-size:.8rem;cursor:pointer;transition:background .3s,color .3s}
+.send:hover{background:var(--white)}
+.send[disabled]{opacity:.6;cursor:wait}
+.form-msg{font-size:.92rem;letter-spacing:.05em;color:var(--dim-w);min-height:1.4em}
+.form-msg.ok{color:var(--gold)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:80px;color:var(--faint-w);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase}
+
+/* ---------- motion helpers (only when JS runs) ---------- */
+.js .reveal{opacity:0;transform:translateY(40px)}
+.js .name .ln > span{transform:translateY(110%)}
+.js .hero-rule{transform:scaleX(0)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1000px){
+  .about{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}
+  .about .facts-col{grid-column:1 / -1}
+}
+@media (max-width:900px){
+  .services,.works,.contact-grid{grid-template-columns:minmax(0,1fr)}
+  .sec-head{grid-template-columns:minmax(0,1fr)}
+  .stack{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .erow{grid-template-columns:minmax(0,1fr)}
+  .erow .org{text-align:left;padding-top:0}
+}
+@media (max-width:640px){
+  .about{grid-template-columns:minmax(0,1fr)}
+  .portrait{max-width:320px}
+}
+@media (max-width:560px){
+  #menuBtn{width:56px;height:56px}
+  #menuBtn span{width:24px}
+  #langBtn{width:42px;height:42px;right:calc(max(22px, calc(env(safe-area-inset-right,0px) + 12px)) + 66px);top:calc(max(22px, calc(env(safe-area-inset-top,0px) + 12px)) + 7px)}
+  .stack,.socials{grid-template-columns:minmax(0,1fr)}
+  .tagline{text-align:left}
+  .label{letter-spacing:.35em}
+  .facts li{grid-template-columns:minmax(0,1fr);gap:4px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .reveal,.js .name .ln > span,.js .hero-rule{opacity:1!important;transform:none!important}
+}
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="locked">
+
+<div class="cursor" aria-hidden="true"></div><div class="cursor-dot" aria-hidden="true"></div>
+<div id="loader" aria-hidden="true"><div class="box"><div class="pct"><span data-i18n="loading">Chargement</span> <span id="pct">0</span>%</div><div class="bar"><i id="bar"></i></div></div></div>
+
+<button id="langBtn" class="ctrl" type="button" data-magnetic aria-label="Switch to English">EN</button>
+<button id="menuBtn" class="ctrl" type="button" data-magnetic aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+<div id="menu" aria-hidden="true">
+  <div class="wrap">
+    <nav>
+      <a href="#accueil"><small>01</small><span data-i18n="m.home">Accueil</span></a>
+      <a href="#expertise"><small>02</small><span data-i18n="m.expertise">Expertise</span></a>
+      <a href="#apropos"><small>03</small><span data-i18n="m.about">À propos</span></a>
+      <a href="#projets"><small>04</small><span data-i18n="m.projects">Projets</span></a>
+      <a href="#parcours"><small>05</small><span data-i18n="m.path">Parcours</span></a>
+      <a href="#contact"><small>06</small><span data-i18n="m.contact">Contact</span></a>
+    </nav>
+    <div class="menu-foot">
+      <a href="mailto:elaazzaoui.mohamed@outlook.com">elaazzaoui.mohamed@outlook.com</a>
+      <a href="https://www.linkedin.com/in/elaazzaoui-mohamed-50196332b" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/elaazzaouimohamed" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- HERO -->
+  <header class="hero" id="accueil">
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <p class="label reveal" data-i18n="h.label">Full-stack · Data · IA</p>
+      <h1 class="name" aria-label="Mohamed Elaazzaoui"><span class="ln"><span>Mohamed</span></span><span class="ln"><span>Elaazzaoui</span></span></h1>
+      <div class="hero-rule"></div>
+      <p class="tagline reveal" data-i18n="h.tag">Je conçois des applications web, des pipelines de données et des solutions d'IA, <b>du prototype à la production</b>.</p>
+      <div class="hero-foot">
+        <span class="status reveal"><i></i><span data-i18n="h.status">Disponible · PFE février 2027</span></span>
+        <span class="scroll-cue reveal"><i></i><span data-i18n="h.scroll">Défiler</span></span>
+      </div>
+    </div>
+  </header>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Spring Boot</span><span>Laravel</span><span>React</span><span>Kafka</span><span>Spark</span><span>Airflow</span><span>dbt</span><span>MLflow</span><span>RAG</span><span>Docker</span><span>Kubernetes</span><span>Azure</span>
+      <span>Spring Boot</span><span>Laravel</span><span>React</span><span>Kafka</span><span>Spark</span><span>Airflow</span><span>dbt</span><span>MLflow</span><span>RAG</span><span>Docker</span><span>Kubernetes</span><span>Azure</span>
+    </div>
+  </div>
+
+  <!-- EXPERTISE -->
+  <section class="plate dark" id="expertise">
+    <div class="wrap">
+      <p class="label kicker reveal" data-i18n="e.kicker">Du code à la donnée, de la donnée à l'IA</p>
+      <div class="sec-head">
+        <p class="label reveal" data-i18n="m.expertise">Expertise</p>
+        <h2 class="big" data-i18n="e.big">Je construis des applications <em>fiables</em>, des chaînes de données <em>temps réel</em> et des outils d'IA qui servent un vrai besoin.</h2>
+      </div>
+      <div class="services">
+        <article class="svc reveal">
+          <h3 data-i18n="s1.t">Développement full-stack</h3>
+          <p data-i18n="s1.p">18 mois chez Webcom sur la plateforme e-commerce devaito.com : API REST, fonctionnalités côté client, thèmes et performances. En projet, des architectures microservices Spring complètes.</p>
+          <ol><li><small>01</small><span data-i18n="s1.a">API REST &amp; microservices</span></li><li><small>02</small><span data-i18n="s1.b">Interfaces React</span></li><li><small>03</small><span data-i18n="s1.c">Bases de données SQL &amp; NoSQL</span></li></ol>
+        </article>
+        <article class="svc reveal">
+          <h3 data-i18n="s2.t">Data engineering</h3>
+          <p data-i18n="s2.p">Des pipelines de bout en bout : ingestion, streaming, stockage, transformation, orchestration et tableaux de bord.</p>
+          <ol><li><small>01</small><span data-i18n="s2.a">Streaming Kafka &amp; Spark</span></li><li><small>02</small><span data-i18n="s2.b">Orchestration Airflow &amp; Dagster</span></li><li><small>03</small><span data-i18n="s2.c">Modélisation dbt, architecture médaillon</span></li></ol>
+        </article>
+        <article class="svc reveal">
+          <h3 data-i18n="s3.t">IA &amp; MLOps</h3>
+          <p data-i18n="s3.p">De la donnée brute au modèle servi par API et monitoré. IA générative appliquée, présentée à la Journée de l'IA de la FSBM.</p>
+          <ol><li><small>01</small><span data-i18n="s3.a">RAG &amp; LLM en local</span></li><li><small>02</small><span data-i18n="s3.b">Fine-tuning NLP (BERT, GPT)</span></li><li><small>03</small><span data-i18n="s3.c">MLflow, FastAPI &amp; data drift</span></li></ol>
+        </article>
+        <article class="svc reveal">
+          <h3 data-i18n="s4.t">DevOps &amp; cloud</h3>
+          <p data-i18n="s4.p">Livrer sans surprise : conteneurs, déploiement continu et infrastructure décrite en code, sur Azure.</p>
+          <ol><li><small>01</small><span data-i18n="s4.a">CI/CD Jenkins</span></li><li><small>02</small><span data-i18n="s4.b">Docker &amp; Kubernetes</span></li><li><small>03</small><span data-i18n="s4.c">Terraform &amp; Ansible</span></li></ol>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="plate light" id="apropos">
+    <div class="wrap">
+      <p class="label kicker reveal" data-i18n="a.kicker">Un développeur qui pense donnée</p>
+      <div class="sec-head">
+        <p class="label reveal" data-i18n="m.about">À propos</p>
+        <h2 class="big" data-i18n="a.big">Une double compétence : <em>développeur en entreprise</em> et étudiant en Master Data Science &amp; Big Data.</h2>
+      </div>
+      <div class="about">
+        <figure class="portrait reveal" id="portrait">
+          <img src="assets/photo.jpg" alt="Portrait de Mohamed Elaazzaoui" loading="lazy" onerror="this.remove();document.getElementById('portrait').classList.add('empty')">
+          <span class="mono" aria-hidden="true">ME</span>
+        </figure>
+        <div class="reveal">
+          <p data-i18n="a.p1">Après une Licence en Sciences Mathématiques et Informatique à la Faculté des Sciences Ben M'Sik, j'ai rejoint <strong>Webcom</strong> pendant un an et demi pour développer la plateforme e-commerce <strong>devaito.com</strong>, en équipe avec le design et le produit.</p>
+          <p data-i18n="a.p2">En Master, j'applique ces réflexes de production à la donnée et à l'IA : microservices, pipelines temps réel, plateformes DataOps / MLOps et assistants d'IA générative qui tournent en local.</p>
+          <p data-i18n="a.p3">Je recherche un <strong>stage de fin d'études de 4 à 6 mois à partir de février 2027</strong>, et je reste ouvert à des missions à distance.</p>
+          <a class="cv-btn" href="assets/CV_Elaazzaoui_Mohamed.pdf" download data-magnetic><span data-i18n="a.cv">Télécharger le CV</span> <span>↓</span></a>
+        </div>
+        <div class="facts-col reveal">
+          <ul class="facts">
+            <li><span data-i18n="f.base">Basé à</span><span>Casablanca, Maroc · <span id="clock"></span></span></li>
+            <li><span data-i18n="f.status">Statut</span><span data-i18n="f.status.v">Master Data Science &amp; Big Data</span></li>
+            <li><span data-i18n="f.search">Recherche</span><span data-i18n="f.search.v">PFE de 4 à 6 mois, dès février 2027</span></li>
+            <li><span data-i18n="f.lang">Langues</span><span data-i18n="f.lang.v">Français, anglais, arabe</span></li>
+            <li><span data-i18n="f.soft">Qualités</span><span data-i18n="f.soft.v">Rigueur, autonomie, esprit d'équipe, adaptabilité</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="plate dark" id="projets">
+    <div class="wrap">
+      <p class="label kicker reveal" data-i18n="p.kicker">De la conception au déploiement</p>
+      <div class="sec-head">
+        <p class="label reveal" data-i18n="m.projects">Projets</p>
+        <h2 class="big" data-i18n="p.big">Des projets <em>complets</em>, pensés comme des produits : architecture, code, déploiement et monitoring.</h2>
+      </div>
+      <div class="works">
+        <article class="work reveal">
+          <div class="shot"><img src="assets/projets/rag.jpg" alt="" loading="lazy" onerror="this.parentElement.remove()"></div>
+          <div class="top"><span class="idx">01</span><span class="cat" data-i18n="w1.c">IA générative</span></div>
+          <h3 data-i18n="w1.t">Assistant de cours IA (RAG)</h3>
+          <p data-i18n="w1.p">Explique un cours et génère des quiz à partir de PDF. RAG 100 % local avec OCR, recherche hybride ChromaDB + BM25 et LLM via Ollama. Présenté à la Journée de l'IA (FSBM).</p>
+          <div class="tags"><span>Python</span><span>Ollama</span><span>ChromaDB</span><span>FastAPI</span><span>Spring Boot</span><span>React</span></div>
+          <a class="go" href="https://github.com/elaazzaouimohamed/AI-Powered-RAG-Course-Assistant" target="_blank" rel="noopener"><span data-i18n="go.code">Voir le code</span> ↗</a>
+        </article>
+        <article class="work reveal">
+          <div class="shot"><img src="assets/projets/pipeline.jpg" alt="" loading="lazy" onerror="this.parentElement.remove()"></div>
+          <div class="top"><span class="idx">02</span><span class="cat">Big Data</span></div>
+          <h3 data-i18n="w2.t">Pipeline de données temps réel</h3>
+          <p data-i18n="w2.p">Flux d'API orchestré par Airflow, diffusé par Kafka, traité par Spark Structured Streaming, stocké dans Cassandra et visualisé dans Grafana. 11 services sous Docker Compose.</p>
+          <div class="tags"><span>Airflow</span><span>Kafka</span><span>Spark</span><span>Cassandra</span><span>Grafana</span></div>
+          <a class="go" href="https://github.com/elaazzaouimohamed/Data_eng_project" target="_blank" rel="noopener"><span data-i18n="go.code">Voir le code</span> ↗</a>
+        </article>
+        <article class="work reveal">
+          <div class="shot"><img src="assets/projets/mlops.jpg" alt="" loading="lazy" onerror="this.parentElement.remove()"></div>
+          <div class="top"><span class="idx">03</span><span class="cat">DataOps / MLOps</span></div>
+          <h3 data-i18n="w3.t">Plateforme data &amp; ML Olist</h3>
+          <p data-i18n="w3.p">Ingestion dlt, architecture médaillon sur DuckDB, transformations dbt, orchestration Dagster, contrôle du data drift. Modèle suivi dans MLflow, servi par FastAPI, monitoré par Prometheus.</p>
+          <div class="tags"><span>dlt</span><span>DuckDB</span><span>dbt</span><span>Dagster</span><span>MLflow</span></div>
+          <a class="go" href="https://github.com/elaazzaouimohamed" target="_blank" rel="noopener"><span data-i18n="go.gh">Profil GitHub</span> ↗</a>
+        </article>
+        <article class="work reveal">
+          <div class="shot"><img src="assets/projets/lias.jpg" alt="" loading="lazy" onerror="this.parentElement.remove()"></div>
+          <div class="top"><span class="idx">04</span><span class="cat">Microservices</span></div>
+          <h3 data-i18n="w4.t">LIAS, gestion de laboratoire</h3>
+          <p data-i18n="w4.p">8 microservices derrière une API Gateway et Eureka, authentification JWT, notifications temps réel par WebSocket et visioconférence. Conteneurisé et déployé sur Azure.</p>
+          <div class="tags"><span>Spring Cloud</span><span>React</span><span>MySQL</span><span>Redis</span><span>Azure</span></div>
+          <a class="go" href="https://github.com/elaazzaouimohamed" target="_blank" rel="noopener"><span data-i18n="go.gh">Profil GitHub</span> ↗</a>
+        </article>
+        <article class="work reveal">
+          <div class="shot"><img src="assets/projets/cicd.jpg" alt="" loading="lazy" onerror="this.parentElement.remove()"></div>
+          <div class="top"><span class="idx">05</span><span class="cat">DevOps</span></div>
+          <h3 data-i18n="w5.t">CI/CD application de crédit</h3>
+          <p data-i18n="w5.p">API Spring Boot sécurisée et interface React. Pipeline Jenkins jusqu'à Kubernetes avec smoke test, sur deux VM Azure provisionnées par Terraform et configurées par Ansible.</p>
+          <div class="tags"><span>Jenkins</span><span>Docker</span><span>Kubernetes</span><span>Terraform</span><span>Ansible</span></div>
+          <a class="go" href="https://github.com/elaazzaouimohamed/credit-management-system" target="_blank" rel="noopener"><span data-i18n="go.code">Voir le code</span> ↗</a>
+        </article>
+        <article class="work reveal">
+          <div class="shot"><img src="assets/projets/bert.jpg" alt="" loading="lazy" onerror="this.parentElement.remove()"></div>
+          <div class="top"><span class="idx">06</span><span class="cat">Deep learning</span></div>
+          <h3 data-i18n="w6.t">Optimiseurs BERT &amp; GPT</h3>
+          <p data-i18n="w6.p">Fine-tuning sur SST-2 et SQuAD, comparaison d'AdamW, LAMB, SGD et AdaFactor avec warmup : précision, stabilité d'entraînement et coût GPU.</p>
+          <div class="tags"><span>PyTorch</span><span>Hugging Face</span><span>NLP</span></div>
+          <a class="go" href="https://github.com/elaazzaouimohamed/bert-gpt-optimizer-comparison-nlp" target="_blank" rel="noopener"><span data-i18n="go.code">Voir le code</span> ↗</a>
+        </article>
+      </div>
+      <p class="works-more reveal" data-i18n="p.more">Aussi : plateforme de suivi académique (PFE de Licence en Java EE, React et IoT) et une revue de littérature sur la segmentation d'utilisateurs à partir de données comportementales massives.</p>
+    </div>
+  </section>
+
+  <!-- PATH -->
+  <section class="plate light" id="parcours">
+    <div class="wrap">
+      <p class="label kicker reveal" data-i18n="r.kicker">Apprendre en construisant</p>
+      <div class="sec-head">
+        <p class="label reveal" data-i18n="m.path">Parcours</p>
+        <h2 class="big" data-i18n="r.big">Expérience &amp; <em>formation</em>.</h2>
+      </div>
+      <div class="rows">
+        <div class="erow reveal">
+          <span class="when">02/2025 — 05/2026</span>
+          <div><h3 data-i18n="r1.t">Développeur Full-Stack (PHP / Laravel)</h3>
+            <ul><li data-i18n="r1.a">Conception, création et modification d'API REST pour devaito.com</li><li data-i18n="r1.b">Solution optimisée couvrant les fonctionnalités e-commerce côté client</li><li data-i18n="r1.c">Templates modernes pour les thèmes de boutique</li><li data-i18n="r1.d">Intégration d'API et optimisation des performances</li></ul></div>
+          <span class="org">Webcom</span>
+        </div>
+        <div class="erow reveal">
+          <span class="when">11/2024 — 02/2025</span>
+          <div><h3 data-i18n="r2.t">Stagiaire Développeur Full-Stack</h3><ul><li data-i18n="r2.a">Applications web front-end et back-end avec Laravel (stage de 3 mois)</li></ul></div>
+          <span class="org">Webcom</span>
+        </div>
+        <div class="erow reveal">
+          <span class="when">2025 — 2027</span>
+          <div><h3>Master Data Science &amp; Big Data</h3><ul><li data-i18n="r3.a">Big Data, Machine Learning, statistique avancée, ingénierie des données</li></ul></div>
+          <span class="org">FSBM · Univ. Hassan II</span>
+        </div>
+        <div class="erow reveal">
+          <span class="when">2021 — 2024</span>
+          <div><h3 data-i18n="r4.t">Licence Sciences Mathématiques et Informatique</h3><ul><li data-i18n="r4.a">PFE : plateforme de suivi académique (Java EE, React, IoT)</li></ul></div>
+          <span class="org">FSBM · Univ. Hassan II</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="plate dark" id="stack">
+    <div class="wrap">
+      <p class="label kicker reveal" data-i18n="k.kicker">Les bons outils pour chaque couche</p>
+      <div class="stack">
+        <div class="reveal"><h4 data-i18n="k.lang">Langages</h4><p>Java, Python, PHP, SQL, JavaScript, C / C++</p></div>
+        <div class="reveal"><h4>Web</h4><p>Spring Boot, Spring Cloud, Java EE, Laravel, React, JWT, WebSocket</p></div>
+        <div class="reveal"><h4>Big Data</h4><p>Spark, Kafka, Airflow, Hadoop, Hive, Flink</p></div>
+        <div class="reveal"><h4>DataOps</h4><p>dbt, Dagster, dlt, DuckDB, ETL / ELT</p></div>
+        <div class="reveal"><h4 data-i18n="k.ai">IA &amp; MLOps</h4><p>PyTorch, Hugging Face, scikit-learn, RAG, Ollama, MLflow, FastAPI</p></div>
+        <div class="reveal"><h4>Cloud &amp; DevOps</h4><p>Docker, Kubernetes, Jenkins, Terraform, Ansible, Azure, Linux</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- CONTACT -->
+<footer class="contact" id="contact">
+  <div class="wrap">
+    <p class="label reveal" data-i18n="m.contact">Contact</p>
+    <h2 class="cta reveal"><span data-i18n="c.l1">Travaillons</span><span data-i18n="c.l2">ensemble</span></h2>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="mail-row">
+          <a class="mail" id="email" href="mailto:elaazzaoui.mohamed@outlook.com">elaazzaoui.mohamed@outlook.com</a>
+          <button class="pill" id="copy" type="button" data-magnetic data-i18n="c.copy">Copier</button>
+        </div>
+        <div class="socials">
+          <span><small data-i18n="c.phone">Téléphone</small><strong>+212 6 10 98 62 07</strong></span>
+          <a href="https://www.linkedin.com/in/elaazzaoui-mohamed-50196332b" target="_blank" rel="noopener"><small>LinkedIn</small><strong>elaazzaoui-mohamed ↗</strong></a>
+          <a href="https://github.com/elaazzaouimohamed" target="_blank" rel="noopener"><small>GitHub</small><strong>elaazzaouimohamed ↗</strong></a>
+          <a href="assets/CV_Elaazzaoui_Mohamed.pdf" download><small>CV</small><strong data-i18n="c.cv">Télécharger (PDF)</strong></a>
+        </div>
+      </div>
+      <form class="form reveal" id="contactForm" novalidate>
+        <div class="field"><label for="f-name" data-i18n="c.name">Nom</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+        <div class="field"><label for="f-email" data-i18n="c.email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="f-msg" data-i18n="c.msg">Message</label><textarea id="f-msg" name="message" required></textarea></div>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr" aria-hidden="true">
+        <div class="form-foot">
+          <button class="send" id="send" type="submit" data-magnetic data-i18n="c.send">Envoyer le message</button>
+          <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
+    <div class="foot"><span>© <span id="year">2026</span> Mohamed Elaazzaoui</span><span>Casablanca, Maroc</span><a href="#accueil" data-i18n="c.top">Haut de page ↑</a></div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+/* Formspree : créez un formulaire gratuit sur https://formspree.io puis collez son identifiant ici (ex. "xyzabcde").
+   Tant qu'il est vide, le bouton ouvre la messagerie du visiteur avec le message pré-rempli. */
+const FORMSPREE_ID = "xjyygbnn";
+
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(pointer: fine)').matches;
+  const hasGsap = !!window.gsap;
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------- i18n ---------- */
+  const EN = {
+    'loading':'Loading',
+    'm.home':'Home','m.expertise':'Expertise','m.about':'About','m.projects':'Projects','m.path':'Journey','m.contact':'Contact',
+    'h.label':'Full-stack · Data · AI',
+    'h.tag':'I build web applications, data pipelines and AI solutions, <b>from prototype to production</b>.',
+    'h.status':'Available · Internship from Feb 2027','h.scroll':'Scroll',
+    'e.kicker':'From code to data, from data to AI',
+    'e.big':'I build <em>reliable</em> applications, <em>real-time</em> data pipelines and AI tools that solve real needs.',
+    's1.t':'Full-stack development','s1.p':'18 months at Webcom on the devaito.com e-commerce platform: REST APIs, client-side features, themes and performance. In projects, complete Spring microservice architectures.',
+    's1.a':'REST APIs &amp; microservices','s1.b':'React interfaces','s1.c':'SQL &amp; NoSQL databases',
+    's2.t':'Data engineering','s2.p':'End-to-end pipelines: ingestion, streaming, storage, transformation, orchestration and dashboards.',
+    's2.a':'Kafka &amp; Spark streaming','s2.b':'Airflow &amp; Dagster orchestration','s2.c':'dbt modelling, medallion architecture',
+    's3.t':'AI &amp; MLOps','s3.p':'From raw data to a model served by an API and monitored. Applied generative AI, presented at the FSBM AI Day.',
+    's3.a':'RAG &amp; local LLMs','s3.b':'NLP fine-tuning (BERT, GPT)','s3.c':'MLflow, FastAPI &amp; data drift',
+    's4.t':'DevOps &amp; cloud','s4.p':'Shipping without surprises: containers, continuous delivery and infrastructure as code, on Azure.',
+    's4.a':'Jenkins CI/CD','s4.b':'Docker &amp; Kubernetes','s4.c':'Terraform &amp; Ansible',
+    'a.kicker':'A developer who thinks in data',
+    'a.big':'A dual profile: <em>developer in industry</em> and Master\'s student in Data Science &amp; Big Data.',
+    'a.p1':'After a Bachelor\'s in Mathematics and Computer Science at the Faculty of Sciences Ben M\'Sik, I spent a year and a half at <strong>Webcom</strong> building the <strong>devaito.com</strong> e-commerce platform alongside design and product.',
+    'a.p2':'In my Master\'s, I bring the same production habits to data and AI: microservices, real-time pipelines, DataOps / MLOps platforms and generative AI assistants that run locally.',
+    'a.p3':'I am looking for a <strong>4 to 6-month end-of-studies internship starting February 2027</strong>, and I am open to remote missions.',
+    'a.cv':'Download CV',
+    'f.base':'Based in','f.status':'Status','f.status.v':'Master\'s in Data Science &amp; Big Data','f.search':'Looking for','f.search.v':'4–6 month internship from Feb 2027',
+    'f.lang':'Languages','f.lang.v':'French, English, Arabic','f.soft':'Strengths','f.soft.v':'Rigour, autonomy, team spirit, adaptability',
+    'p.kicker':'From design to deployment',
+    'p.big':'<em>Complete</em> projects, built like products: architecture, code, deployment and monitoring.',
+    'w1.c':'Generative AI','w1.t':'AI course assistant (RAG)','w1.p':'Explains a course and generates quizzes from PDFs. 100% local RAG with OCR, hybrid ChromaDB + BM25 search and an LLM via Ollama. Presented at the FSBM AI Day.',
+    'w2.t':'Real-time data pipeline','w2.p':'API stream orchestrated by Airflow, published to Kafka, processed by Spark Structured Streaming, stored in Cassandra and visualised in Grafana. 11 services with Docker Compose.',
+    'w3.t':'Olist data &amp; ML platform','w3.p':'dlt ingestion, medallion architecture on DuckDB, dbt transformations, Dagster orchestration, data drift checks. Model tracked in MLflow, served by FastAPI, monitored with Prometheus.',
+    'w4.t':'LIAS, lab management','w4.p':'8 microservices behind an API Gateway and Eureka, JWT authentication, real-time WebSocket notifications and video conferencing. Containerised and deployed on Azure.',
+    'w5.t':'CI/CD for a loan application','w5.p':'Secured Spring Boot API and React UI. Jenkins pipeline to Kubernetes with a smoke test, on two Azure VMs provisioned with Terraform and configured with Ansible.',
+    'w6.t':'BERT &amp; GPT optimisers','w6.p':'Fine-tuning on SST-2 and SQuAD, comparing AdamW, LAMB, SGD and AdaFactor with warmup: accuracy, training stability and GPU cost.',
+    'go.code':'View code','go.gh':'GitHub profile',
+    'p.more':'Also: an academic tracking platform (Bachelor\'s final project in Java EE, React and IoT) and a literature review on user segmentation from large-scale behavioural data.',
+    'r.kicker':'Learning by building','r.big':'Experience &amp; <em>education</em>.',
+    'r1.t':'Full-Stack Developer (PHP / Laravel)','r1.a':'Designed, built and updated REST APIs for devaito.com','r1.b':'Optimised solution covering client-side e-commerce features','r1.c':'Modern templates for store themes','r1.d':'API integration and performance optimisation',
+    'r2.t':'Full-Stack Developer Intern','r2.a':'Front-end and back-end web applications with Laravel (3-month internship)',
+    'r3.a':'Big Data, Machine Learning, advanced statistics, data engineering',
+    'r4.t':'Bachelor\'s in Mathematics and Computer Science','r4.a':'Final project: academic tracking platform (Java EE, React, IoT)',
+    'k.kicker':'The right tools for every layer','k.lang':'Languages','k.ai':'AI &amp; MLOps',
+    'c.l1':'Let\'s work','c.l2':'together','c.copy':'Copy','c.phone':'Phone','c.cv':'Download (PDF)',
+    'c.name':'Name','c.email':'Email','c.msg':'Message','c.send':'Send message','c.top':'Back to top ↑'
+  };
+  const MSG = {
+    fr:{copied:'Copié ✓', copy:'Copier', sending:'Envoi…', sent:'Merci, votre message est bien parti. Je réponds rapidement.', error:'L\'envoi a échoué. Écrivez-moi directement à elaazzaoui.mohamed@outlook.com.', missing:'Merci de remplir les trois champs avec un email valide.', mailto:'Votre messagerie va s\'ouvrir avec le message pré-rempli.', menuOpen:'Ouvrir le menu', menuClose:'Fermer le menu', switchTo:'Switch to English', clockSuffix:' (heure locale)',
+      title:'Mohamed Elaazzaoui – Full-Stack, Data & IA', desc:'Mohamed Elaazzaoui, développeur full-stack et data à Casablanca : applications web, pipelines Big Data, MLOps et IA générative. Disponible pour un PFE en février 2027.'},
+    en:{copied:'Copied ✓', copy:'Copy', sending:'Sending…', sent:'Thanks, your message is on its way. I reply quickly.', error:'Sending failed. Email me directly at elaazzaoui.mohamed@outlook.com.', missing:'Please fill in all three fields with a valid email.', mailto:'Your email app will open with the message filled in.', menuOpen:'Open menu', menuClose:'Close menu', switchTo:'Passer en français', clockSuffix:' (local time)',
+      title:'Mohamed Elaazzaoui – Full-Stack, Data & AI', desc:'Mohamed Elaazzaoui, full-stack and data developer in Casablanca: web applications, Big Data pipelines, MLOps and generative AI. Available for an internship from February 2027.'}
+  };
+  const FR = {};
+  document.querySelectorAll('[data-i18n]').forEach(el => { FR[el.dataset.i18n] = el.innerHTML; });
+  let lang = 'fr';
+  try { const q = new URLSearchParams(location.search).get('lang'); lang = q || localStorage.getItem('lang') || 'fr'; } catch (e) {}
+  if (lang !== 'en') lang = 'fr';
+  const langBtn = document.getElementById('langBtn');
+  function applyLang(l, animateWords) {
+    lang = l;
+    const dict = l === 'en' ? EN : FR;
+    document.querySelectorAll('[data-i18n]').forEach(el => { const v = dict[el.dataset.i18n]; if (v != null) el.innerHTML = v; });
+    document.documentElement.lang = l;
+    document.title = MSG[l].title;
+    document.querySelector('meta[name="description"]').setAttribute('content', MSG[l].desc);
+    langBtn.textContent = l === 'en' ? 'FR' : 'EN';
+    langBtn.setAttribute('aria-label', MSG[l].switchTo);
+    btn.setAttribute('aria-label', document.body.classList.contains('menu-open') ? MSG[l].menuClose : MSG[l].menuOpen);
+    splitWords(animateWords);
+    tickClock();
+    try { localStorage.setItem('lang', l); } catch (e) {}
+  }
+
+  /* split big headings into words for the scroll reveal */
+  function splitWords(hidden) {
+    document.querySelectorAll('.big').forEach(h => {
+      const walk = node => {
+        [...node.childNodes].forEach(n => {
+          if (n.nodeType === 3) {
+            const frag = document.createDocumentFragment();
+            n.textContent.split(/(\s+)/).forEach(part => {
+              if (!part) return;
+              if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+              const w = document.createElement('span'); w.className = 'w';
+              const i = document.createElement('span'); i.textContent = part;
+              if (hidden && !reduce && hasGsap) i.style.transform = 'translateY(110%)';
+              w.appendChild(i); frag.appendChild(w);
+            });
+            n.replaceWith(frag);
+          } else if (n.nodeType === 1 && !n.classList.contains('w')) walk(n);
+        });
+      };
+      walk(h);
+    });
+  }
+
+  /* ---------- clock ---------- */
+  const clock = document.getElementById('clock');
+  const fmt = new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Casablanca' });
+  function tickClock() { clock.textContent = fmt.format(new Date()) + MSG[lang].clockSuffix; }
+  setInterval(tickClock, 30000);
+
+  /* ---------- menu ---------- */
+  const btn = document.getElementById('menuBtn'), menu = document.getElementById('menu');
+  const setMenu = open => {
+    document.body.classList.toggle('menu-open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? MSG[lang].menuClose : MSG[lang].menuOpen);
+    menu.setAttribute('aria-hidden', String(!open));
+    if (lenis) open ? lenis.stop() : lenis.start();
+    else document.body.style.overflow = open ? 'hidden' : '';
+  };
+  btn.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+  addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  langBtn.addEventListener('click', () => applyLang(lang === 'en' ? 'fr' : 'en', false));
+
+  /* ---------- smooth scroll (Lenis) ---------- */
+  let lenis = null;
+  if (window.Lenis && !reduce) {
+    lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+    if (hasGsap && window.ScrollTrigger) {
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(t => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      const raf = t => { lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf);
+    }
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+    const id = a.getAttribute('href'); const target = id.length > 1 ? document.querySelector(id) : document.body;
+    if (!target) return;
+    e.preventDefault();
+    setMenu(false);
+    if (lenis) lenis.scrollTo(target, { offset: 0, duration: 1.4 });
+    else target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  }));
+
+  /* ---------- custom cursor + magnetic buttons ---------- */
+  if (fine && !reduce) {
+    document.body.classList.add('has-cursor');
+    const ring = document.querySelector('.cursor'), dot = document.querySelector('.cursor-dot');
+    let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+    addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; dot.style.transform = `translate(${mx}px,${my}px)`; });
+    const follow = () => { rx += (mx - rx) * .16; ry += (my - ry) * .16; ring.style.transform = `translate(${rx}px,${ry}px)`; requestAnimationFrame(follow); };
+    follow();
+    document.addEventListener('pointerover', e => { if (e.target.closest('a,button,.work,input,textarea')) ring.classList.add('hover'); });
+    document.addEventListener('pointerout', e => { if (e.target.closest('a,button,.work,input,textarea')) ring.classList.remove('hover'); });
+    document.querySelectorAll('[data-magnetic]').forEach(el => {
+      el.addEventListener('pointermove', e => {
+        const r = el.getBoundingClientRect(), x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2;
+        el.style.transform = `translate(${x * .3}px,${y * .3}px)`;
+      });
+      el.addEventListener('pointerleave', () => { el.style.transition = 'transform .5s cubic-bezier(.2,.8,.2,1),background .3s,color .3s'; el.style.transform = ''; setTimeout(() => el.style.transition = '', 500); });
+    });
+  }
+
+  /* ---------- copy email ---------- */
+  const copy = document.getElementById('copy');
+  copy.addEventListener('click', () => {
+    const t = document.getElementById('email').textContent;
+    const ok = () => { copy.textContent = MSG[lang].copied; setTimeout(() => copy.textContent = MSG[lang].copy, 1800); };
+    const sel = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById('email')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    navigator.clipboard ? navigator.clipboard.writeText(t).then(ok, sel) : sel();
+  });
+
+  /* ---------- contact form ---------- */
+  const form = document.getElementById('contactForm'), formMsg = document.getElementById('formMsg'), send = document.getElementById('send');
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    formMsg.className = 'form-msg';
+    const data = new FormData(form);
+    const name = (data.get('name') || '').trim(), email = (data.get('email') || '').trim(), message = (data.get('message') || '').trim();
+    if (!name || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { formMsg.textContent = MSG[lang].missing; return; }
+    if (data.get('_gotcha')) return;
+    if (!FORMSPREE_ID) {
+      const subject = encodeURIComponent((lang === 'en' ? 'Message from ' : 'Message de ') + name);
+      const body = encodeURIComponent(message + '\n\n' + name + ' — ' + email);
+      formMsg.textContent = MSG[lang].mailto;
+      location.href = `mailto:elaazzaoui.mohamed@outlook.com?subject=${subject}&body=${body}`;
+      return;
+    }
+    send.disabled = true; formMsg.textContent = MSG[lang].sending;
+    try {
+      const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error(res.status);
+      form.reset(); formMsg.textContent = MSG[lang].sent; formMsg.classList.add('ok');
+    } catch (err) {
+      formMsg.textContent = MSG[lang].error;
+    } finally { send.disabled = false; }
+  });
+
+  /* ---------- project card spotlight ---------- */
+  document.querySelectorAll('.work').forEach(w => w.addEventListener('pointermove', e => {
+    const r = w.getBoundingClientRect();
+    w.style.setProperty('--x', (e.clientX - r.left) + 'px');
+    w.style.setProperty('--y', (e.clientY - r.top) + 'px');
+  }));
+
+  /* ---------- 3D gold ring (paused when hidden) ---------- */
+  const canvas = document.getElementById('scene');
+  (function initScene() {
+    if (!window.THREE) { canvas.style.display = 'none'; return; }
+    let renderer;
+    try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'low-power' }); } catch (e) { canvas.style.display = 'none'; return; }
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, innerWidth < 700 ? 1.5 : 2));
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(38, 1, .1, 100);
+    camera.position.set(0, 0, 12);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x8a7a5a, .9));
+    const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(5, 6, 8); scene.add(key);
+    const rim = new THREE.DirectionalLight(0xffe2a8, 1.2); rim.position.set(-6, -3, -4); scene.add(rim);
+    const warm = new THREE.PointLight(0xffd27a, 1.2, 30); warm.position.set(-3, 2, 5); scene.add(warm);
+    const gold = new THREE.MeshStandardMaterial({ color: 0xd8ad5c, metalness: .85, roughness: .26 });
+    const pearl = new THREE.MeshStandardMaterial({ color: 0xf4f3ef, metalness: .05, roughness: .32 });
+    const group = new THREE.Group(); scene.add(group);
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(3.4, .07, 32, 220), gold); group.add(ring);
+    const ring2 = new THREE.Mesh(new THREE.TorusGeometry(2.55, .025, 24, 200), gold); ring2.rotation.x = Math.PI / 2.4; group.add(ring2);
+    const big = new THREE.Mesh(new THREE.SphereGeometry(1.55, 64, 64), pearl); group.add(big);
+    const small = new THREE.Mesh(new THREE.SphereGeometry(.36, 48, 48), gold); group.add(small);
+    const tiny = new THREE.Mesh(new THREE.SphereGeometry(.16, 32, 32), pearl); group.add(tiny);
+
+    const baseY = () => innerWidth < 700 ? 1.9 : 2.1;
+    const place = () => {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+      const mobile = w < 700;
+      group.position.set(mobile ? .5 : 3.6, baseY(), 0);
+      group.scale.setScalar(mobile ? .58 : 1);
+    };
+    place(); addEventListener('resize', place);
+
+    const mouse = { x: 0, y: 0 };
+    addEventListener('pointermove', e => { mouse.x = e.clientX / innerWidth - .5; mouse.y = e.clientY / innerHeight - .5; });
+    const clockT = new THREE.Clock();
+    let running = false, visible = true;
+    const frame = () => {
+      if (!running) return;
+      const t = clockT.getElapsedTime(), scrollK = Math.min(1, scrollY / innerHeight);
+      ring.rotation.x = .9 + Math.sin(t * .3) * .12 + mouse.y * .35;
+      ring.rotation.y = -.35 + Math.cos(t * .25) * .12 + mouse.x * .45;
+      ring2.rotation.z = t * .18;
+      big.position.y = Math.sin(t * .8) * .12;
+      small.position.set(Math.cos(t * .55) * 3.4, Math.sin(t * .55) * 1.2, Math.sin(t * .55) * 3.0);
+      tiny.position.set(Math.cos(t * .9 + 2) * 2.55, Math.sin(t * .9 + 2) * 2.2, Math.cos(t * .9) * .8);
+      group.rotation.z = scrollK * .6;
+      group.position.y += (baseY() + scrollK * 2.5 - group.position.y) * .08;
+      renderer.render(scene, camera);
+      requestAnimationFrame(frame);
+    };
+    const update = () => { const should = visible && !document.hidden && !reduce; if (should && !running) { running = true; requestAnimationFrame(frame); } else if (!should) running = false; };
+    new IntersectionObserver(es => { visible = es[0].isIntersecting; update(); }).observe(document.querySelector('.hero'));
+    document.addEventListener('visibilitychange', update);
+    if (reduce) renderer.render(scene, camera); else update();
+  })();
+
+  /* ---------- loader + intro ---------- */
+  applyLang(lang, true);
+  const loader = document.getElementById('loader'), pctEl = document.getElementById('pct'), bar = document.getElementById('bar');
+  let shown = 0, target = 30, finished = false;
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => target = Math.max(target, 80));
+  addEventListener('load', () => target = 100);
+  setTimeout(() => target = 100, 3500);
+  const startTime = performance.now();
+  const step = () => {
+    if (finished) return;
+    shown = Math.min(target, (performance.now() - startTime) / 1600 * 100);
+    pctEl.textContent = Math.round(shown); bar.style.width = shown + '%';
+    if (shown >= 100) return finish();
+    requestAnimationFrame(step);
+  };
+  setTimeout(() => finish(), 6000);
+  function finish() {
+    if (finished) return; finished = true;
+    pctEl.textContent = 100; bar.style.width = '100%';
+    loader.classList.add('done');
+    document.body.classList.remove('locked');
+    setTimeout(() => loader.remove(), 1100);
+    intro();
+  }
+  if (reduce) { finished = true; loader.remove(); document.body.classList.remove('locked'); intro(); }
+  else requestAnimationFrame(step);
+
+  function intro() {
+    if (!hasGsap || reduce) {
+      document.querySelectorAll('.reveal,.name .ln > span,.hero-rule,.big .w > span').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+      return;
+    }
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.ticker.lagSmoothing(0);
+    const tl = gsap.timeline({ delay: .35 });
+    tl.to('.name .ln > span', { y: 0, duration: 1.3, ease: 'power4.out', stagger: .12 })
+      .to('.hero-rule', { scaleX: 1, duration: 1.2, ease: 'power3.inOut' }, '-=.9')
+      .to('.hero .reveal', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: .1 }, '-=.8');
+
+    gsap.utils.toArray('main .reveal:not(.hero .reveal), footer .reveal').forEach(el => {
+      gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+    });
+    gsap.utils.toArray('.big').forEach(h => {
+      gsap.to(h.querySelectorAll('.w > span'), { y: 0, duration: 1, ease: 'power4.out', stagger: .035, scrollTrigger: { trigger: h, start: 'top 85%' } });
+    });
+    gsap.utils.toArray('.svc li, .erow').forEach(el => {
+      gsap.from(el, { x: -30, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%' } });
+    });
+    gsap.from('.cta span', { yPercent: 40, opacity: 0, duration: 1.2, ease: 'power4.out', stagger: .12, scrollTrigger: { trigger: '.cta', start: 'top 85%' } });
+  }
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
