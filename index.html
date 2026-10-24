@@ -842,16 +842,40 @@ const FORMSPREE_ID = "xjyygbnn";
       .to('.hero-rule', { scaleX: 1, duration: 1.2, ease: 'power3.inOut' }, '-=.9')
       .to('.hero .reveal', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: .1 }, '-=.8');
 
-    gsap.utils.toArray('main .reveal:not(.hero .reveal), footer .reveal').forEach(el => {
-      gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+    /* Scroll reveals: checked against the live layout on every scroll / resize / height change,
+       so images that load or disappear later can never leave a section hidden. */
+    const pending = new Map();
+    const add = (el, play) => pending.set(el, play);
+    document.querySelectorAll('main .reveal:not(.hero .reveal), footer .reveal').forEach(el =>
+      add(el, () => gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' })));
+    document.querySelectorAll('.big').forEach(h =>
+      add(h, () => gsap.to(h.querySelectorAll('.w > span'), { y: 0, duration: 1, ease: 'power4.out', stagger: .035 })));
+    document.querySelectorAll('.svc li').forEach(el => {
+      gsap.set(el, { x: -30, opacity: 0 });
+      add(el, () => gsap.to(el, { x: 0, opacity: 1, duration: .9, ease: 'power3.out' }));
     });
-    gsap.utils.toArray('.big').forEach(h => {
-      gsap.to(h.querySelectorAll('.w > span'), { y: 0, duration: 1, ease: 'power4.out', stagger: .035, scrollTrigger: { trigger: h, start: 'top 85%' } });
-    });
-    gsap.utils.toArray('.svc li, .erow').forEach(el => {
-      gsap.from(el, { x: -30, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%' } });
-    });
-    gsap.from('.cta span', { yPercent: 40, opacity: 0, duration: 1.2, ease: 'power4.out', stagger: .12, scrollTrigger: { trigger: '.cta', start: 'top 85%' } });
+    const cta = document.querySelector('.cta');
+    gsap.set('.cta span', { yPercent: 40, opacity: 0 });
+    add(cta.parentElement.querySelector('.cta span'), () => gsap.to('.cta span', { yPercent: 0, opacity: 1, duration: 1.2, ease: 'power4.out', stagger: .12 }));
+
+    let queued = false;
+    const check = () => {
+      queued = false;
+      const limit = innerHeight * .9;
+      const atBottom = scrollY + innerHeight >= document.documentElement.scrollHeight - 4;
+      pending.forEach((play, el) => {
+        if (atBottom || el.getBoundingClientRect().top < limit) { pending.delete(el); play(); }
+      });
+    };
+    const schedule = () => { if (!queued && pending.size) { queued = true; requestAnimationFrame(check); } };
+    addEventListener('scroll', schedule, { passive: true });
+    addEventListener('resize', schedule);
+    addEventListener('load', schedule);
+    if (lenis) lenis.on('scroll', schedule);
+    if (window.ResizeObserver) new ResizeObserver(schedule).observe(document.body);
+    document.querySelectorAll('img').forEach(i => { i.addEventListener('load', schedule); i.addEventListener('error', () => setTimeout(schedule, 50)); });
+    const safety = setInterval(() => { pending.size ? schedule() : clearInterval(safety); }, 1000);
+    schedule();
   }
 })();
 </script>
