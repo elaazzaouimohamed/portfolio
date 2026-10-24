@@ -1,5 +1,7 @@
 # Portfolio — Mohamed Elaazzaoui
 
+En ligne : https://mohamed-elaazzaoui.vercel.app (déploiement automatique à chaque push sur `main`).
+
 Site d'une seule page (HTML/CSS/JS, sans build) :
 
 ```
